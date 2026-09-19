@@ -1,14 +1,21 @@
 # Proyecto Integrador I - Juego de Cartas
-**Asignatura:** Estructuras de Datos - Ciclo 2026 - 2do Cuatrimestre  
-**Institución:** Facultad de Ingeniería - Universidad Nacional de Jujuy (UNJu)  
-**Carreras:** Ingeniería Informática / Licenciatura en Sistemas  
+
+* **Asignatura:** Estructuras de Datos - Ciclo 2026 - 2do Cuatrimestre  
+* **Carreras:** Ingeniería Informática / Licenciatura en Sistemas
+* **Institución:** Facultad de Ingeniería - Universidad Nacional de Jujuy (UNJu) 
 
 ---
-
-##  Descripción General
-El proyecto consiste en la simulación de un juego de cartas para 4 jugadores que compiten durante rondas tomando cartas de un mazo de naipes franceses (52 cartas) ordenadas al azar. En cada ronda, los jugadores comparan sus cartas y el que obtiene la carta de mayor valor numérico se lleva las cartas de los demás y las guarda en su **pozo acumulador (Pila)**. En caso de empate en el valor máximo, cada jugador conserva su carta. Gana el jugador que obtenga el mayor puntaje al finalizar las rondas.
-
+<p align="right">
+  <i>"No hay mazo que se mezcle solo, ni programa que se organice sin buenas estructuras."</i>
+  <br>
+  <b>— Grupo 508 - Comisión 5</b>
+</p>
 ---
+
+## 📝 Descripción General
+
+El trabajo  consiste en la simulación de un juego de cartas para 4 jugadores que compiten durante **3 rondas**, tomando cartas de un mazo de naipes franceses de 52 cartas mezcladas al azar.
+
 ## Mapa conceptual del juego:
 
 ```text
@@ -33,7 +40,7 @@ El proyecto consiste en la simulación de un juego de cartas para 4 jugadores qu
                    │              ▼                │
                    │       ┌──────────────┐        │
                    └──────►│ CADA JUGADOR │◄───────┘
-                           │ RECIBE 1 CARTA│
+                           │RECIBE 1 CARTA│
                            └──────┬───────┘
                                   │
                                   ▼
@@ -76,203 +83,90 @@ El proyecto consiste en la simulación de un juego de cartas para 4 jugadores qu
 ```
 ---
 
-## Lo Que Ya Está Hecho y Cómo Funciona
+## ⚙️ Estructuras y Clases Utilizadas
 
-Actualmente se encuentran implementadas y documentadas las estructuras base y las clases del dominio del mazo:
+El proyecto se organiza en 4 paquetes, cada uno con una responsabilidad clara: las estructuras genéricas (`ed.tda`), las piezas del juego (`modelo`), el árbitro de la partida (`juego`) y el punto de entrada (`main`).
 
-### 1. `ed.tda.Arreglo<T>` (TDA Arreglo Genérico)
-* **Cómo funciona:** Es una estructura contigua de memoria de tamaño fijo (`capacidadMax`). Almacena elementos genéricos utilizando un array `Object[]`. 
-* **Funcionalidad clave:** Ofrece inserción ordenada al final (`insertar`), acceso directo por índice `obtener(i)` en tiempo constante $\mathcal{O}(1)$, verificación de estado (`estaVacio`, `estaLleno`) y el método `intercambiar(i, j)`, indispensable para modificar de posición dos elementos en operaciones de ordenamiento o barajado.
+### 📦 Resumen
 
-### 2. `ed.tda.Pila<T>` (TDA Pila Genérico)
-* **Cómo funciona:** Implementación propia de una estructura LIFO (Last In, First Out) **construida sobre la clase `Arreglo<T>`**.
-* **Funcionalidad clave:** Permite apilar elementos en la cima (`apilar`), consultar el elemento superior (`verCima`) y desapilar (`desapilar`). En el contexto del juego, se utiliza para representar el pozo de cartas ganadas por cada jugador, permitiendo acumular los naipes y luego desapilarlos al final para calcular el puntaje total.
-
-### 3. `modelo.Carta`
-* **Cómo funciona:** Modela un naipe individual del mazo francés.
-* **Atributos:** Contiene el `palo` (Trébol, Pica, Corazones, Diamantes), el `valor` (1 a 13) y el estado de la carta (`disponible` o `no disponible`).
-
-### 4. `modelo.Mazo`
-* **Cómo funciona:** Encapsula las 52 cartas francesas organizadas internamente mediante el `Pila<Carta>`.
-* **Funcionalidad clave:** 
-  * `inicializarMazo()`: Genera las 52 combinaciones de cartas.
-  * `mezclar()`: Implementa el algoritmo de **Fisher-Yates** aprovechando el método `intercambiar` del TDA Arreglo para barajar las cartas al azar.
-  * `sacarCarta()`: Entrega una carta del mazo y cambia su estado a no disponible (`disponible = false`).
-
---- 
-
-# Descripción de las clases:
-
-## `ed.tda.Arreglo<T>`
-
-Es un TDA Arreglo genérico de tamaño fijo.
-
-Se utiliza como estructura auxiliar para almacenar elementos y acceder a ellos mediante índices.
-
-Entre sus operaciones se encuentran:
-
-* `insertar()`
-* `obtener()`
-* `modificar()`
-* `longitud()`
-* `capacidad()`
-* `estaVacio()`
-* `estaLleno()`
-* `intercambiar()`
-
-También se utiliza durante el proceso de mezcla del mazo.
+| Clase | Paquete | Rol en una frase |
+|---|---|---|
+| `Arreglo<T>` | `ed.tda` | Base de tamaño fijo sobre la que se construyen Pila y Cola |
+| `Pila<T>` | `ed.tda` | LIFO — administra el mazo y el pozo de cada jugador |
+| `Cola<T>` | `ed.tda` | FIFO — administra el orden de turno de los 4 jugadores |
+| `Carta` | `modelo` | Un naipe: palo, valor y disponibilidad |
+| `Mazo` | `modelo` | Genera, mezcla y reparte las 52 cartas |
+| `Jugador` | `modelo` | Datos del jugador + su pozo de cartas ganadas |
+| `ControladorJuego` | `juego` | Arbitra la partida: reparte, compara y define ganadores |
+| `Principal` | `main` | Punto de entrada del programa |
 
 ---
 
-## `ed.tda.Pila<T>`
+### `➖ ed.tda.Arreglo<T>`
+![paquete](https://img.shields.io/badge/paquete-ed.tda-2f81f7)
 
-Implementa una estructura **LIFO (Last In, First Out)** utilizando el TDA `Arreglo`.
+TDA Arreglo genérico de tamaño fijo. Es la base sobre la que se construyen la Pila y la Cola, y también se usa como auxiliar durante el mezclado del mazo.
 
-Sus principales operaciones son:
+**Operaciones:** `insertar()` · `obtener()` · `modificar()` · `longitud()` · `capacidad()` · `estaVacio()` · `estaLleno()` · `intercambiar()`
 
-* `apilar()`
-* `desapilar()`
-* `verCima()`
-* `estaVacia()`
-* `estaLlena()`
-* `tamanio()`
+### `➖ ed.tda.Pila<T>`
+![paquete](https://img.shields.io/badge/paquete-ed.tda-2f81f7)
 
-Se utiliza para:
+Estructura **LIFO** (Last In, First Out) construida sobre `Arreglo<T>`.
 
-1. Administrar el mazo de cartas.
-2. Administrar el pozo de cartas de cada jugador.
+**Operaciones:** `apilar()` · `desapilar()` · `verCima()` · `estaVacia()` · `estaLlena()` · `tamanio()`
 
----
+**Se usa para:** administrar el mazo de cartas y el pozo de cartas acumuladas de cada jugador.
 
-## `ed.tda.Cola<T>`
+### `➖ ed.tda.Cola<T>`
+![paquete](https://img.shields.io/badge/paquete-ed.tda-2f81f7)
 
-Implementa una estructura **FIFO (First In, First Out)**.
+Estructura **FIFO** (First In, First Out) construida sobre `Arreglo<T>`. Administra el orden de turno de los 4 jugadores durante las rondas.
 
-Se utiliza para administrar el orden de los cuatro jugadores durante las rondas.
+**Operaciones:** `encolar()` · `desencolar()` · `frente()` · `estaVacia()` · `estaLlena()` · `tamanio()`
 
-Sus principales operaciones son:
+### `➖ modelo.Carta`
+![paquete](https://img.shields.io/badge/paquete-modelo-fb8500)
 
-* `encolar()`
-* `desencolar()`
-* `verFrente()`
-* `estaVacia()`
-* `estaLlena()`
-* `tamanio()`
+Representa una carta individual del mazo francés.
 
----
+**Atributos:** `palo` · `valor` (1 a 13) · `disponible`
 
-## `modelo.Carta`
+### `➖ modelo.Mazo`
+![paquete](https://img.shields.io/badge/paquete-modelo-fb8500)
 
-Representa una carta individual.
+Representa el mazo francés de 52 cartas, administrado internamente con una `Pila<Carta>`.
 
-Contiene:
+**Responsabilidades:** generar las 52 cartas (4 palos × valores del 1 al 13), mezclarlas con Fisher-Yates, entregarlas durante las rondas marcándolas como no disponibles, e informar cuántas quedan.
 
-```text
-palo
-valor
-disponible
-```
+### `➖ modelo.Jugador`
+![paquete](https://img.shields.io/badge/paquete-modelo-fb8500)
 
-Además, permite consultar y modificar el estado de disponibilidad de la carta.
+Representa a cada participante de la partida.
 
----
+**Atributos:** `nombre` · `apellido` · `edad` · `pozo` (`Pila<Carta>`)
 
-## `modelo.Mazo`
+Puede recibir cartas (las apila en su pozo) y calcular su puntaje final sumando el valor de todo lo acumulado.
 
-Representa el mazo francés de 52 cartas.
+### `➖ juego.ControladorJuego`
+![paquete](https://img.shields.io/badge/paquete-juego-2a9d8f)
 
-Sus principales responsabilidades son:
+Controla la lógica principal de la partida: ejecuta las rondas tomando jugadores de la Cola y repartiéndoles cartas del Mazo, compara valores, resuelve empates, y calcula los puntajes finales.
 
-* Crear las 52 cartas.
-* Mezclarlas aleatoriamente.
-* Administrarlas mediante una Pila.
-* Entregar cartas durante las rondas.
-* Marcar las cartas entregadas como no disponibles.
-* Informar cuántas cartas quedan disponibles.
+### `➖ main.Principal`
+![paquete](https://img.shields.io/badge/paquete-main-6c757d)
+
+Punto de entrada del programa: registra a los jugadores, crea el mazo y la Cola de turnos, e inicia la partida.
 
 ---
 
-## `modelo.Jugador`
+## 🔗 Relación entre las estructuras y el juego
 
-Representa a cada participante.
-
-Contiene:
-
-```text
-nombre
-apellido
-edad
-pozo
-```
-
-El `pozo` es una `Pila<Carta>` donde se almacenan las cartas que el jugador obtiene durante las rondas.
-
-También permite:
-
-* Consultar sus datos.
-* Recibir cartas.
-* Calcular su puntaje final.
-
----
-
-## `juego.ControladorJuego`
-
-Es la clase encargada de controlar la lógica principal de la partida.
-
-Se ocupa de:
-
-* Ejecutar las rondas.
-* Obtener los jugadores de la Cola.
-* Solicitar cartas al Mazo.
-* Comparar las cartas.
-* Determinar el ganador de cada ronda.
-* Entregar las cartas correspondientes.
-* Resolver empates.
-* Calcular los puntajes finales.
-* Mostrar los resultados.
-
----
-
-## `main.Principal`
-
-Es el punto de entrada del programa.
-
-Se encarga de:
-
-* Mostrar el menú inicial.
-* Registrar a los cuatro jugadores.
-* Crear el mazo.
-* Crear la Cola de jugadores.
-* Crear el `ControladorJuego`.
-* Iniciar la partida.
-* Preguntar si se desea jugar nuevamente.
-
----
-
-##  Lo Que Falta Implementar (Para el Resto del Equipo) --- listo🫣?
-
-Para completar el desarrollo del programa de acuerdo a las consignas de la cátedra, restan por implementar los siguientes módulos:
-
-### 1. `ed.tda.Cola<T>` (TDA Cola propio)
-* **Objetivo:** Implementar el TDA Cola (FIFO) para la gestión del **turno de los 4 jugadores**.
-* **Métodos requeridos:** `encolar(T x)`, `desencolar()`, `frente()`, `estaVacia()`, `tamanio()`.
-
-### 2. `modelo.Jugador`
-* **Objetivo:** Representar a cada participante del juego.
-* **Atributos requeridos:** `nombre`, `apellido`, `edad` (exigidos por la consigna) y una instancia de `Pila<Carta>` (su pozo de cartas ganadas).
-* **Métodos requeridos:** Getters/Setters, método para recibir y apilar cartas en su pozo, y método para calcular el puntaje total desapilando las cartas de su pozo.
-
-### 3. `juego.ControladorJuego`
-* **Objetivo:** Orquestar la partida e integrar todas las estructuras de datos.
-* **Lógica requerida:**
-  * Controlar la ronda actual (ejecutar las rondas o limitar a 3 rondas).
-  * Usar el TDA Cola para dar turno a los 4 jugadores.
-  * Despachar cartas del `Mazo`, comparar los valores de la ronda actual y determinar al ganador de la ronda.
-  * Enviar las cartas ganadas al pozo (`Pila`) del ganador correspondiente (o hacer que cada uno conserve la suya si hay empate).
-  * Calcular los puntajes finales y determinar al o los ganadores.
-
-### 4. `main.Principal`
-* **Objetivo:** Punto de entrada ejecutable del sistema. Debe instanciar a los jugadores, el mazo, iniciar el juego y mostrar los resultados y el informe final en consola.
+| Estructura | Comportamiento | Dónde se usa en el juego |
+|---|---|---|
+| **Arreglo** | Cantidad fija y conocida de elementos | Los 4 jugadores de la ronda · las 4 cartas de la ronda · los puntajes finales · la mezcla del mazo |
+| **Pila** | LIFO | Administrar el mazo y extraer cartas · acumular las cartas de cada jugador · desapilarlas al calcular el puntaje |
+| **Cola** | FIFO | Mantener el orden de los 4 jugadores · obtener al jugador correspondiente en el reparto · reincorporarlo para la siguiente ronda |
 
 ---
 
@@ -316,3 +210,8 @@ El proyecto cuenta con un script ejecutable para compilar y correr todo en un so
 
 ```cmd
 .\run.bat
+```
+---
+<p align="center">
+  ♠️ Proyecto Integrador I — Estructura de Datos · Comisión 5 · UNJU ♠️
+</p>
