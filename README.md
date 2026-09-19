@@ -172,7 +172,7 @@ Punto de entrada del programa: registra a los jugadores, crea el mazo y la Cola 
 
 ---
 
-## Estructura de Archivos del Proyecto
+## 📂 Estructura de Archivos del Proyecto
 
 ```text
 juego-cartas/
@@ -196,7 +196,7 @@ juego-cartas/
 └── README.md
 ```
 
-## Compilación y Ejecución
+## 🚀 Compilación y Ejecución
 
 ### Ejecución en Windows (`run.bat`)
 
