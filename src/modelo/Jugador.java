@@ -47,16 +47,30 @@ public class Jugador {
 
     /**
      * Calcula el puntaje sumando los valores de las cartas.
+     *
+     * Las cartas se sacan temporalmente del pozo utilizando
+     * una pila auxiliar y luego se vuelven a colocar.
      */
     public int calcularPuntaje() {
 
         int puntaje = 0;
 
+        Pila<Carta> auxiliar = new Pila<>(52);
+
+        // Sacamos las cartas y calculamos el puntaje
         while (!pozo.estaVacia()) {
 
             Carta carta = pozo.desapilar();
 
             puntaje += carta.getValor();
+
+            auxiliar.apilar(carta);
+        }
+
+        // Volvemos a colocar las cartas en el pozo
+        while (!auxiliar.estaVacia()) {
+
+            pozo.apilar(auxiliar.desapilar());
         }
 
         return puntaje;
