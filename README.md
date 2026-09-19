@@ -279,7 +279,7 @@ Para completar el desarrollo del programa de acuerdo a las consignas de la cáte
 ## Estructura de Archivos del Proyecto
 
 ```text
-juego-cartas/
+EdD-ProyectoIntegradorI-2026-Grupo508/
 ├── bin/                      # Binarios compilados (.class)
 ├── src/
 │   ├── ed/
