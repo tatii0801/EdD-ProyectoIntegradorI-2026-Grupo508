@@ -5,11 +5,13 @@
 * **Institución:** Facultad de Ingeniería - Universidad Nacional de Jujuy (UNJu) 
 
 ---
+
 <p align="right">
   <i>"No hay mazo que se mezcle solo, ni programa que se organice sin buenas estructuras."</i>
   <br>
   <b>— Grupo 508 - Comisión 5</b>
 </p>
+
 ---
 
 ## 📝 Descripción General
