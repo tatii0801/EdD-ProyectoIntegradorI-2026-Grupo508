@@ -12,18 +12,9 @@ public class Mazo {
     private Pila<Carta> cartas;
 
     public Mazo() {
-        // Un mazo estándar francés consta de 52 cartas
-        this.cartas = new Pila<>(52);
         inicializarYMezclar();
     }
-
-    /**
-     * Carga los 52 naipes franceses en un Arreglo auxiliar, aplica el
-     * algoritmo de Fisher-Yates para barajar y los apila en la Pila.
-     */
-    public void mezclar() {
-        inicializarYMezclar();
-    }
+    
 
     private void inicializarYMezclar() {
         Arreglo<Carta> mazoTemporal = new Arreglo<>(52);
