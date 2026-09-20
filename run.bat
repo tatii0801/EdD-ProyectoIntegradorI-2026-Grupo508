@@ -32,6 +32,7 @@ echo src/juego/ControladorJuego.java>> sources.txt
 echo src/modelo/Carta.java>> sources.txt
 echo src/modelo/Jugador.java>> sources.txt
 echo src/modelo/Mazo.java>> sources.txt
+echo src/util/Validaciones.java>> sources.txt
 
 :: Conservamos intacto tu comando: javac lee la lista limpia que creamos arriba en sources.txt
 javac -d %BIN_DIR% @sources.txt
