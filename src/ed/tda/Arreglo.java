@@ -33,13 +33,55 @@ public class Arreglo<T> {
         }
         return (T) elementos[indice];
     }
-
-    @SuppressWarnings("unchecked")
+    
     public void modificar(int indice, T elemento) {
         if (indice < 0 || indice >= cantidad) {
             throw new IndexOutOfBoundsException("Índice fuera de rango: " + indice);
         }
         elementos[indice] = elemento;
+    }
+
+    
+    /**
+     * Elimina y retorna el ultimo elemento del arreglo
+     */
+    @SuppressWarnings("unchecked")
+    public T eliminarUltimo() {
+
+        if (cantidad == 0) {
+
+            throw new IllegalStateException("El arreglo está vacio");
+        }
+
+        cantidad--;
+        T elemento = (T) elementos[cantidad];
+        elementos[cantidad] = null;
+
+        return elemento;
+    }
+
+    /**
+     * Elimina y retorna el primer elemento del arreglo
+     * Los demas elementos se desplazan una posicion hacia el inicio
+     */
+    @SuppressWarnings("unchecked")
+    public T eliminarPrimero() {
+
+        if (cantidad == 0) {
+
+            throw new IllegalStateException("El arreglo esta vacio");
+        }
+        T elemento = (T) elementos[0];
+
+        for (int i = 1; i < cantidad; i++) {
+
+            elementos[i - 1] = elementos[i];
+        }
+
+        cantidad--;
+        elementos[cantidad] = null;
+
+        return elemento;
     }
 
     public int longitud() {

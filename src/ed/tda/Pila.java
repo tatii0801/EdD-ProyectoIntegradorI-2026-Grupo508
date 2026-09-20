@@ -27,18 +27,11 @@ public class Pila<T> {
      */
     public T desapilar() {
         if (estaVacia()) {
-            throw new IllegalStateException("La pila está vacía (Underflow).");
+
+            throw new IllegalStateException("La pila está vacía (Underflow)");
         }
-        int ultimoIndice = arreglo.longitud() - 1;
-        T cima = arreglo.obtener(ultimoIndice);
         
-        // Creamos un nuevo arreglo para achicar el tamaño interno
-        Arreglo<T> nuevoArreglo = new Arreglo<>(arreglo.capacidad());
-        for (int i = 0; i < ultimoIndice; i++) {
-            nuevoArreglo.insertar(arreglo.obtener(i));
-        }
-        this.arreglo = nuevoArreglo;
-        return cima;
+        return arreglo.eliminarUltimo();
     }
 
     /**

@@ -27,24 +27,16 @@ public class Cola<T> {
     }
 
     /**
-     * Retira y retorna el primer elemento de la cola.
+     * Retira y retorna el primer elemento de la cola
      */
     public T desencolar() {
+
         if (estaVacia()) {
-            throw new IllegalStateException("La cola está vacía.");
+
+            throw new IllegalStateException("La cola está vacia");
         }
 
-        T primero = arreglo.obtener(0);
-
-        Arreglo<T> nuevoArreglo = new Arreglo<>(arreglo.capacidad());
-
-        for (int i = 1; i < arreglo.longitud(); i++) {
-            nuevoArreglo.insertar(arreglo.obtener(i));
-        }
-
-        this.arreglo = nuevoArreglo;
-
-        return primero;
+        return arreglo.eliminarPrimero();
     }
 
     /**
