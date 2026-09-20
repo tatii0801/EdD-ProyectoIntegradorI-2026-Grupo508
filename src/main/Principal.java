@@ -6,10 +6,11 @@ import ed.tda.Cola;
 import juego.ControladorJuego;
 import modelo.Jugador;
 import modelo.Mazo;
+import util.Validaciones;
 
 /**
- * Clase principal del proyecto.
- * Esqueleto para el punto de entrada de la aplicación.
+ * Clase principal del proyecto
+ * Esqueleto para el punto de entrada de la aplicación
  */
 
 public class Principal {
@@ -25,9 +26,9 @@ public class Principal {
         System.out.println("======================================");
         System.out.println();
 
-        System.out.println("Bienvenido al juego.");
-        System.out.println("La partida se juega con 4 jugadores.");
-        System.out.println("Cada partida tiene 3 rondas.");
+        System.out.println("Bienvenido al juego de cartas");
+        System.out.println("La partida se juega con 4 jugadores");
+        System.out.println("Cada partida tiene 3 rondas");
         System.out.println();
 
         while (jugarNuevamente) {
@@ -46,14 +47,9 @@ public class Principal {
 
                 System.out.println("Jugador " + i);
 
-                System.out.print("Nombre: ");
-                String nombre = scanner.nextLine();
-
-                System.out.print("Apellido: ");
-                String apellido = scanner.nextLine();
-
-                System.out.print("Edad: ");
-                int edad = Integer.parseInt(scanner.nextLine());
+                String nombre = Validaciones.leerTexto(scanner, "Nombre: ", Validaciones.LETRAS_MIN_TEXTO);
+                String apellido = Validaciones.leerTexto(scanner, "Apellido: ", Validaciones.LETRAS_MIN_TEXTO);
+                int edad = Validaciones.leerEdad(scanner);
 
                 Jugador jugador = new Jugador(nombre, apellido, edad);
 
@@ -63,8 +59,8 @@ public class Principal {
             }
 
             System.out.println("======================================");
-            System.out.println("Los 4 jugadores fueron registrados.");
-            System.out.println("La partida comenzará con 3 rondas.");
+            System.out.println("Los 4 jugadores fueron registrados correctamente");
+            System.out.println("La partida comenzará con 3 rondas");
             System.out.println("======================================");
             System.out.println();
 
@@ -74,8 +70,7 @@ public class Principal {
             if (respuesta.equalsIgnoreCase("s")) {
 
                 // Creamos el controlador del juego
-                ControladorJuego controlador =
-                        new ControladorJuego(mazo, jugadores, 3);
+                ControladorJuego controlador = new ControladorJuego(mazo, jugadores, 3);
 
                 // Iniciamos la partida
                 controlador.iniciarPartida();
@@ -83,7 +78,7 @@ public class Principal {
             } else {
 
                 System.out.println();
-                System.out.println("Partida cancelada.");
+                System.out.println("Partida cancelada. ¡Hasta luego!");
             }
 
             System.out.println();

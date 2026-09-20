@@ -44,9 +44,23 @@ public class ControladorJuego {
             }
 
             jugarRonda(ronda);
+
+            // Rota los turnos para la ronda siguiente
+            if (ronda < cantidadRondas) {
+
+                rotarTurnos();
+            }
         }
 
         mostrarResultadosFinales();
+    }
+
+    /**
+     * Rota la cola de jugadores el primero pasa al final cambiando quien tiene el primer turno en cada ronda
+     */
+    private void rotarTurnos() {
+
+        jugadores.encolar(jugadores.desencolar());
     }
 
     /**
@@ -55,9 +69,13 @@ public class ControladorJuego {
     private void jugarRonda(int numeroRonda) {
 
         System.out.println("--------------------------------------");
-        System.out.println("           RONDA " + numeroRonda
-                + " DE " + cantidadRondas);
+        System.out.println("           RONDA " + numeroRonda + " DE " + cantidadRondas);
         System.out.println("--------------------------------------");
+
+        
+        // Muestra quién está al frente de la cola (recibe la primera carta)
+        Jugador primero = jugadores.frente();
+        System.out.println("Primer turno: " + primero.getNombre() + " " + primero.getApellido());
 
         // Arreglo para guardar los jugadores de esta ronda
         Arreglo<Jugador> jugadoresRonda = new Arreglo<>(4);
@@ -138,7 +156,7 @@ public class ControladorJuego {
                     + ganador.getApellido()
             );
 
-            System.out.println("Se queda con las 4 cartas.");
+            System.out.println("Se queda con las 4 cartas");
 
             // El ganador recibe las cuatro cartas
             for (int i = 0; i < cartasRonda.longitud(); i++) {
