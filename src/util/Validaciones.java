@@ -128,4 +128,43 @@ public class Validaciones {
 
         return edad >= EDAD_MINIMA && edad <= EDAD_MAXIMA;
     }
+
+    /**
+     * RONDAS: Lee la cantidad de rondas ingresada por el usuario y valida que sea un numero entero dentro del rango establecido
+     * Repite la lectura hasta que sea valida
+     *
+     * @param scanner lector de entrada por consola
+     * @return la cantidad de rondas valida ingresada
+     */
+    public static int leerCantidadRondas(Scanner scanner) {
+        String texto;
+        do {
+            System.out.print("¿Cuántas rondas desean jugar? (1 a 13. Recomendado para partida rápida: 3): ");
+            texto = scanner.nextLine().trim();
+            if (!esRondaValida(texto)) {
+                System.out.println("* Cantidad inválida: ingrese un número entero entre 1 y 13.");
+            }
+        } while (!esRondaValida(texto));
+        return Integer.parseInt(texto);
+    }
+
+    /**
+     * Valida que el texto esté formado solo por dígitos y que su valor esté dentro del rango de 1 a 13
+     * 
+     * @param texto texto a validar
+     * @return true si la cantidad de rondas es válida, false en caso contrario
+     */
+    public static boolean esRondaValida(String texto) {
+        if (texto.isEmpty() || texto.length() > 2) {
+            return false;
+        }
+        for (int i = 0; i < texto.length(); i++) {
+            char c = texto.charAt(i);
+            if (c < '0' || c > '9') {
+                return false;
+            }
+        }
+        int rondas = Integer.parseInt(texto);
+        return rondas >= 1 && rondas <= 13;
+    }
 }
