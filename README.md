@@ -29,7 +29,7 @@ El trabajo  consiste en la simulación de un juego de cartas para 4 jugadores qu
                     │               │               │
                     ▼               ▼               ▼
              ┌────────────┐  ┌────────────┐  ┌────────────┐
-             │ 4 JUGADORES│  │    MAZO    │  │ 3 RONDAS   │
+             │ 4 JUGADORES│  │    MAZO    │  │ 1-13 RONDAS│
              └─────┬──────┘  │ 52 CARTAS  │  └─────┬──────┘
                    │         └─────┬──────┘        │
                    │               │               │
