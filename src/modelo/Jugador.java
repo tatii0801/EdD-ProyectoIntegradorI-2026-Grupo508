@@ -75,4 +75,15 @@ public class Jugador {
 
         return puntaje;
     }
+
+     /**
+     *Vacía el pozo de cartas del jugador.
+     * Es necesario si se reutilizan los jugadores para una nueva partida.
+     */
+    
+    public void vaciarPozo() {
+        while (!pozo.estaVacia()) {
+            pozo.desapilar();
+        }
+    }
 }
