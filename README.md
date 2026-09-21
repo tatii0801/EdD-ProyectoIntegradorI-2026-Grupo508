@@ -26,12 +26,12 @@
 
 ## 📝 Descripción General
 
-El trabajo  consiste en la simulación de un juego de cartas para 4 jugadores que compiten durante **varias rondas**, tomando cartas de un mazo de naipes franceses de 52 cartas mezcladas al azar.
-Para simplificar la ejecución, el programa permite seleccionar la cantidad de rondas, entre 1 y 13, siendo 3 una cantidad recomendada para una partida rápida, **donde 3 es la simplificación recomendada y ahora el usuario puede elegir.**
+* El trabajo  consiste en la simulación de un juego de cartas para 4 jugadores que compiten durante **varias rondas**, tomando cartas de un mazo de naipes franceses de 52 cartas mezcladas al azar.
+* Para simplificar la ejecución, el programa permite seleccionar la cantidad de rondas, entre 1 y 13, siendo 3 una cantidad recomendada para una partida rápida, **donde 3 es la simplificación recomendada y ahora el usuario puede elegir.**
 
 ## Mapa conceptual del juego:
 
-```text
+```text     
                          ┌─────────────────────┐
                          │       PARTIDA       │
                          └──────────┬──────────┘
@@ -42,13 +42,13 @@ Para simplificar la ejecución, el programa permite seleccionar la cantidad de r
              ┌────────────┐  ┌────────────┐  ┌──────────────────┐
              │ 4 JUGADORES│  │    MAZO    │  │   1-13 RONDAS    |
              |            |  |  52 CARTAS |  | (3 recomendadas) │
-             └─────┬──────┘  │            │  └────────┬─────────┘
-                   │         └─────┬──────┘           │
-                   │               │                  │
+             └─────┬──────┘  └─────┬──────┘  └────────┬─────────┘         
+                   │               |                  |
+                   |               │                  │
                    ▼               ▼                  │
               ┌─────────┐    ┌──────────┐             │
-              │  COLA   │    │  PILA    │             │
-              │  FIFO   │    │  MAZO    │             │
+              │  COLA   │    │   PILA   │             │
+              │  FIFO   │    │   MAZO   │             │
               └────┬────┘    └────┬─────┘             │
                    │              │                   │
                    │              ▼                   │
