@@ -27,8 +27,8 @@ public class Principal {
 
         // Incio del programa
         System.out.println();
-        System.out.println("          ♠️♦️♣️♥️ JUEGO DE CARTAS ♠️♦️♣️♥️ ");
-        System.out.println("======================================");
+        System.out.println("     ♠️♦️♣️♥️ JUEGO DE CARTAS ♠️♦️♣️♥️ ");
+        System.out.println("===========================================");
         System.out.println();
 
         System.out.println("Bienvenido al juego de cartas");
@@ -88,7 +88,8 @@ public class Principal {
 
             // Confirmamos si quieren iniciar la partida
             System.out.print("¿Desea comenzar la partida? (s/n): ");
-            String respuesta = scanner.nextLine();
+            // Validamos que la respuesta si o si s/n
+            String respuesta = Validaciones.leerRespuestasSN(scanner);
 
             if (respuesta.equalsIgnoreCase("s")) {
                 // Arrancamos la partida usando cantidadRondas
@@ -98,11 +99,12 @@ public class Principal {
                 // Preguntas del final (solo aparecen si efectivamente se jugó)
                 System.out.println();
                 System.out.print("¿Desea jugar otra partida? (s/n): ");
-                String respPartida = scanner.nextLine().trim();
+                // validamos la respuesta
+                String respuesta = Validaciones.leerRespuestasSN(scanner);
 
                 if (respPartida.equalsIgnoreCase("s")) {
                     System.out.print("¿Desea mantener los mismos jugadores? (s/n): ");
-                    String respJugadores = scanner.nextLine().trim();
+                    String respuesta = Validaciones.leerRespuestasSN(scanner);
                     mantenerJugadores = respJugadores.equalsIgnoreCase("s");
                     System.out.println();
                 } else {
