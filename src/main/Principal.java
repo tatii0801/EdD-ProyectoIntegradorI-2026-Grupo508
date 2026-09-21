@@ -89,7 +89,7 @@ public class Principal {
             // Confirmamos si quieren iniciar la partida
             System.out.print("¿Desea comenzar la partida? (s/n): ");
             // Validamos que la respuesta si o si s/n
-            String respuesta = Validaciones.leerRespuestasSN(scanner);
+            String respuesta = Validaciones.leerRespuestaSN(scanner);
 
             if (respuesta.equalsIgnoreCase("s")) {
                 // Arrancamos la partida usando cantidadRondas
@@ -100,11 +100,11 @@ public class Principal {
                 System.out.println();
                 System.out.print("¿Desea jugar otra partida? (s/n): ");
                 // validamos la respuesta
-                String respPartida = Validaciones.leerRespuestasSN(scanner);
+                String respPartida = Validaciones.leerRespuestaSN(scanner);
 
                 if (respPartida.equalsIgnoreCase("s")) {
                     System.out.print("¿Desea mantener los mismos jugadores? (s/n): ");
-                    String respJugadores = Validaciones.leerRespuestasSN(scanner);
+                    String respJugadores = Validaciones.leerRespuestaSN(scanner);
                     mantenerJugadores = respJugadores.equalsIgnoreCase("s");
                     System.out.println();
                 } else {
