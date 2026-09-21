@@ -14,6 +14,16 @@
 
 ---
 
+## 👥 Integrantes
+**Comisión 5 — Grupo 508**
+
+* 👤 **Anachuri Nicolas Daniel**
+* 👤 **Gregorio Gaston Yamil**
+* 👤 **Nieva Tatiana Valeria**
+* 👤 **Santos Romina Ester**
+* 👤 **Trujillo Estefania Alejandra**
+
+
 ## 📝 Descripción General
 
 El trabajo  consiste en la simulación de un juego de cartas para 4 jugadores que compiten durante **3 rondas**, tomando cartas de un mazo de naipes franceses de 52 cartas mezcladas al azar.
