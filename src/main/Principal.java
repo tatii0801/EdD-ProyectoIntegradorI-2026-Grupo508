@@ -100,11 +100,11 @@ public class Principal {
                 System.out.println();
                 System.out.print("¿Desea jugar otra partida? (s/n): ");
                 // validamos la respuesta
-                String respuesta = Validaciones.leerRespuestasSN(scanner);
+                String respPartida = Validaciones.leerRespuestasSN(scanner);
 
                 if (respPartida.equalsIgnoreCase("s")) {
                     System.out.print("¿Desea mantener los mismos jugadores? (s/n): ");
-                    String respuesta = Validaciones.leerRespuestasSN(scanner);
+                    String respJugadores = Validaciones.leerRespuestasSN(scanner);
                     mantenerJugadores = respJugadores.equalsIgnoreCase("s");
                     System.out.println();
                 } else {
