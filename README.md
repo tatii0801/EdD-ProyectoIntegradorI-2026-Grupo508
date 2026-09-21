@@ -175,7 +175,7 @@ El proyecto se organiza en 4 paquetes, cada uno con una responsabilidad clara: l
 ## 📂 Estructura de Archivos del Proyecto
 
 ```text
-juego-cartas/
+EdD-ProyectoIntegradorI-2026-Grupo508/
 ├── bin/                      # Binarios compilados (.class)
 ├── src/
 │   ├── ed/
@@ -189,11 +189,15 @@ juego-cartas/
 │   │   └── Jugador.java      # [hecho] Entidad Jugador con Pila propia
 │   ├── juego/
 │   │   └── ControladorJuego.java # [hecho] Lógica de rondas y reglas
-│   └── main/
-│       └── Principal.java    # [hecho] Punto de entrada del programa
-├── run.sh                    # Script de compilación y ejecución en Linux
+│   ├── main/
+│   │   └── Principal.java    # [hecho] Punto de entrada del programa
+│   └── util/
+│       └── Validaciones.java # [HECHO] Validaciones de consola
+// ├── run.sh                    # Script de compilación y ejecución en Linux
+├── run.bat                   # Script de compilación y ejecución en Windows
 ├── .gitignore
 └── README.md
+
 ```
 
 ## 🚀 Compilación y Ejecución
