@@ -26,7 +26,8 @@
 
 ## 📝 Descripción General
 
-El trabajo  consiste en la simulación de un juego de cartas para 4 jugadores que compiten durante **3 rondas**, tomando cartas de un mazo de naipes franceses de 52 cartas mezcladas al azar.
+El trabajo  consiste en la simulación de un juego de cartas para 4 jugadores que compiten durante **varias rondas**, tomando cartas de un mazo de naipes franceses de 52 cartas mezcladas al azar.
+Para simplificar la ejecución, el programa permite seleccionar la cantidad de rondas, entre 1 y 13, siendo 3 una cantidad recomendada para una partida rápida, **donde 3 es la simplificación recomendada y ahora el usuario puede elegir.**
 
 ## Mapa conceptual del juego:
 
@@ -38,20 +39,21 @@ El trabajo  consiste en la simulación de un juego de cartas para 4 jugadores qu
                     ┌───────────────┼───────────────┐
                     │               │               │
                     ▼               ▼               ▼
-             ┌────────────┐  ┌────────────┐  ┌────────────┐
-             │ 4 JUGADORES│  │    MAZO    │  │ 1-13 RONDAS│
-             └─────┬──────┘  │ 52 CARTAS  │  └─────┬──────┘
-                   │         └─────┬──────┘        │
-                   │               │               │
-                   ▼               ▼               │
-              ┌─────────┐    ┌──────────┐          │
-              │  COLA   │    │  PILA    │          │
-              │  FIFO   │    │  MAZO    │          │
-              └────┬────┘    └────┬─────┘          │
-                   │              │                │
-                   │              ▼                │
-                   │       ┌──────────────┐        │
-                   └──────►│ CADA JUGADOR │◄───────┘
+             ┌────────────┐  ┌────────────┐  ┌──────────────────┐
+             │ 4 JUGADORES│  │    MAZO    │  │   1-13 RONDAS    |
+             |            |  |  52 CARTAS |  | (3 recomendadas) │
+             └─────┬──────┘  │            │  └────────┬─────────┘
+                   │         └─────┬──────┘           │
+                   │               │                  │
+                   ▼               ▼                  │
+              ┌─────────┐    ┌──────────┐             │
+              │  COLA   │    │  PILA    │             │
+              │  FIFO   │    │  MAZO    │             │
+              └────┬────┘    └────┬─────┘             │
+                   │              │                   │
+                   │              ▼                   │
+                   │       ┌──────────────┐           │
+                   └──────►│ CADA JUGADOR │◄──────────┘
                            │RECIBE 1 CARTA│
                            └──────┬───────┘
                                   │
@@ -121,12 +123,12 @@ El proyecto se organiza en 4 paquetes, cada uno con una responsabilidad clara: l
 * **Rol en el juego:** Es el motor interno de la Pila y la Cola. También se usa como estructura temporal para mezclar el mazo y para guardar en la mesa a los jugadores y cartas durante cada ronda.
 
 ### ![paquete](https://img.shields.io/badge/paquete-ed.tda-007bff) ➖ Pila<T> ➖
-* **Descripción:** Estructura de datos dinámica con comportamiento **LIFO** (Last In, First Out).
+* **Descripción:** Estructura de datos dinámica con comportamiento **LIFO** (Last In, First Out) implementada mediante un TDA Arreglo de tamaño.
 * **Características:** Construida internamente sobre el TDA `Arreglo<T>`. Sus operaciones principales son `apilar()` y `desapilar()`.
 * **Rol en el juego:** Administra el Mazo principal (siempre se saca la carta de la cima) y el Pozo de cada jugador (acumulando una sobre otra las cartas ganadas).
 
 ### ![paquete](https://img.shields.io/badge/paquete-ed.tda-007bff) ➖ Cola<T> ➖
-* **Descripción:** Estructura de datos dinámica con comportamiento **FIFO** (First In, First Out).
+* **Descripción:** Estructura de datos dinámica con comportamiento **FIFO** (First In, First Out) implementada mediante un TDA Arreglo de tamaño.
 * **Características:** Construida internamente sobre el TDA `Arreglo<T>`. Sus operaciones principales son `encolar()` y `desencolar()`.
 * **Rol en el juego:** Administra los turnos de la partida. El primer jugador en la fila juega, y luego es enviado al final de la cola para esperar su próximo turno en la siguiente ronda.
 
@@ -148,7 +150,7 @@ El proyecto se organiza en 4 paquetes, cada uno con una responsabilidad clara: l
 ### ![paquete](https://img.shields.io/badge/paquete-juego-fd7e14) ➖ ControladorJuego ➖
 * **Descripción:** Clase que actúa como el "árbitro" central del sistema.
 * **Características:** Vincula lógicamente al `Mazo`, la `Cola` de jugadores y la cantidad de rondas establecidas.
-* **Rol en el juego:** Ejecuta el ciclo de rondas, reparte las cartas de la mesa, compara los valores numéricos, resuelve los empates (devolviendo las cartas) y declara a los ganadores finales.
+* **Rol en el juego:** Ejecuta el ciclo de rondas, reparte las cartas de la mesa, compara los valores numéricos, resuelve los empates (devolviendo las cartas donde asigna las cartas según las reglas del juego) y declara a los ganadores finales.
 
 ### ![paquete](https://img.shields.io/badge/paquete-util-6f42c1) ➖ Validaciones ➖
 * **Descripción:** Clase utilitaria compuesta por métodos estáticos.
