@@ -168,7 +168,7 @@ public class Validaciones {
         return rondas >= 1 && rondas <= 13;
     }
 
-    /* VALIDACIÓN RESPUESTAS
+    /** VALIDACIÓN RESPUESTAS
      * Lee una respuesta de tipo Sí/No.
      * Solo acepta "s" o "n", sin importar si se escribe
      * en mayúscula o minúscula.
@@ -191,9 +191,9 @@ public class Validaciones {
             System.out.print(" - Respuesta inválida. Ingrese 's' o 'n': - ");
         }
 
-    } while (!respuesta.equalsIgnoreCase("s") &&
-             !respuesta.equalsIgnoreCase("n"));
-
+     } while (!respuesta.equalsIgnoreCase("s") &&
+            !respuesta.equalsIgnoreCase("n"));
+        
     // Cuando la respuesta es válida, la devolvemos.
     return respuesta;
     }
