@@ -1,4 +1,4 @@
-# Proyecto Integrador I - Juego de Cartas
+# 🃏 Proyecto Integrador I - Juego de Cartas
 
 * **Asignatura:** Estructuras de Datos - Ciclo 2026 - 2do Cuatrimestre  
 * **Carreras:** Ingeniería Informática / Licenciatura en Sistemas
