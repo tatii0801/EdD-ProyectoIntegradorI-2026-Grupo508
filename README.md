@@ -193,12 +193,15 @@ EdD-ProyectoIntegradorI-2026-Grupo508/
 │   │   └── Principal.java    # [hecho] Punto de entrada del programa
 │   └── util/
 │       └── Validaciones.java # [HECHO] Validaciones de consola
+```
+<!-- ├── run.sh                    # Script de compilación y ejecución en Linux -->
+```text
 ├── run.bat                   # Script de compilación y ejecución en Windows
 ├── .gitignore
 └── README.md
-
 ```
-//├── run.sh                    # Script de compilación y ejecución en Linux
+
+
 ## 🚀 Compilación y Ejecución
 
 ### Ejecución en Windows (`run.bat`)
