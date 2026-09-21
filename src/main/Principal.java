@@ -20,24 +20,30 @@ public class Principal {
         Scanner scanner = new Scanner(System.in);
 
         boolean jugarNuevamente = true;
+        boolean mantenerJugadores = false;
 
-        System.out.println("======================================");
-        System.out.println("          JUEGO DE CARTAS");
-        System.out.println("======================================");
+        // Creamos la cola de jugadores afuera del bucle para mantenerlos entre partidas
+        Cola<Jugador> jugadores = new Cola<>(4);
+
+        // Incio del programa
+        System.out.println();
+        System.out.println("     ♠️♦️♣️♥️ JUEGO DE CARTAS ♠️♦️♣️♥️ ");
+        System.out.println("===========================================");
         System.out.println();
 
         System.out.println("Bienvenido al juego de cartas");
         System.out.println("La partida se juega con 4 jugadores");
-        System.out.println("Cada partida tiene 3 rondas");
         System.out.println();
 
         while (jugarNuevamente) {
 
-            // Creamos un nuevo mazo
+            // Creamos un nuevo mazo en CADA partida
             Mazo mazo = new Mazo();
+            
+            if (!mantenerJugadores) {
+                // si son jugadores nuevos, se crea una nueva cola de jugadores, renovamos
+                jugadores = new Cola<>(4);
 
-            // Creamos la cola para los 4 jugadores
-            Cola<Jugador> jugadores = new Cola<>(4);
 
             System.out.println("===== REGISTRO DE JUGADORES =====");
             System.out.println();
@@ -45,10 +51,10 @@ public class Principal {
             // Registramos los cuatro jugadores
             for (int i = 1; i <= 4; i++) {
 
-                System.out.println("Jugador " + i);
+                System.out.println("* Jugador " + i);
 
-                String nombre = Validaciones.leerTexto(scanner, "Nombre: ", Validaciones.LETRAS_MIN_TEXTO);
-                String apellido = Validaciones.leerTexto(scanner, "Apellido: ", Validaciones.LETRAS_MIN_TEXTO);
+                String nombre = Validaciones.leerTexto(scanner, " - Nombre: ", Validaciones.LETRAS_MIN_TEXTO);
+                String apellido = Validaciones.leerTexto(scanner, " - Apellido: ", Validaciones.LETRAS_MIN_TEXTO);
                 int edad = Validaciones.leerEdad(scanner);
 
                 Jugador jugador = new Jugador(nombre, apellido, edad);
@@ -58,44 +64,67 @@ public class Principal {
                 System.out.println();
             }
 
-            System.out.println("======================================");
-            System.out.println("Los 4 jugadores fueron registrados correctamente");
-            System.out.println("La partida comenzará con 3 rondas");
-            System.out.println("======================================");
+            System.out.println("----------------------------------------------------");
+            System.out.println(" Los 4 jugadores fueron registrados correctamente");
+            System.out.println("----------------------------------------------------");
             System.out.println();
-
-            System.out.print("¿Desea comenzar la partida? (s/n): ");
-            String respuesta = scanner.nextLine();
-
-            if (respuesta.equalsIgnoreCase("s")) {
-
-                // Creamos el controlador del juego
-                ControladorJuego controlador = new ControladorJuego(mazo, jugadores, 3);
-
-                // Iniciamos la partida
-                controlador.iniciarPartida();
 
             } else {
+                System.out.println("===== NUEVA PARTIDA =====");
+                System.out.println("Preparando a los mismos jugadores...");
+                
+                // Vaciamos las cartas que los jugadores ganaron en la partida anterior
+                for (int i = 0; i < 4; i++) {
+                    Jugador jugador = jugadores.desencolar();
+                    jugador.vaciarPozo();
+                    jugadores.encolar(jugador); // Lo volvemos a meter en la cola
+                }
+            }
 
+            // Preguntamos las rondas para esta partida
+            System.out.println();
+            System.out.println("===== RONDAS =====");
+            int cantidadRondas = Validaciones.leerCantidadRondas(scanner);
+
+            // Confirmamos si quieren iniciar la partida
+            System.out.print("¿Desea comenzar la partida? (s/n): ");
+            // Validamos que la respuesta si o si s/n
+            String respuesta = Validaciones.leerRespuestaSN(scanner);
+
+            if (respuesta.equalsIgnoreCase("s")) {
+                // Arrancamos la partida usando cantidadRondas
+                ControladorJuego controlador = new ControladorJuego(mazo, jugadores, cantidadRondas);
+                controlador.iniciarPartida();
+
+                // Preguntas del final (solo aparecen si efectivamente se jugó)
+                System.out.println();
+                System.out.print("¿Desea jugar otra partida? (s/n): ");
+                // validamos la respuesta
+                String respPartida = Validaciones.leerRespuestaSN(scanner);
+
+                if (respPartida.equalsIgnoreCase("s")) {
+                    System.out.print("¿Desea mantener los mismos jugadores? (s/n): ");
+                    String respJugadores = Validaciones.leerRespuestaSN(scanner);
+                    mantenerJugadores = respJugadores.equalsIgnoreCase("s");
+                    System.out.println();
+                } else {
+                    jugarNuevamente = false;
+                }
+
+            } else {
+                // Si se arrepiente, cancelamos la partida y salimos del bucle
                 System.out.println();
                 System.out.println("Partida cancelada. ¡Hasta luego!");
-            }
-
-            System.out.println();
-            System.out.print("¿Desea jugar otra partida? (s/n): ");
-
-            respuesta = scanner.nextLine();
-
-            if (!respuesta.equalsIgnoreCase("s")) {
                 jugarNuevamente = false;
             }
+        } 
 
-            System.out.println();
-        }
-
-        System.out.println("======================================");
-        System.out.println("       ¡Fin del Juego!");
-        System.out.println("======================================");
+        
+        // Cierre del programa
+        System.out.println();
+        System.out.println("========================================");
+        System.out.println("   ♠️♦️♣️♥️ Fin del Juego ♠️♦️♣️♥️ ");
+        System.out.println("========================================");
 
         scanner.close();
     }

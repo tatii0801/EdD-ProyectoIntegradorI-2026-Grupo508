@@ -39,7 +39,7 @@ public class ControladorJuego {
         for (int ronda = 1; ronda <= cantidadRondas; ronda++) {
 
             if (mazo.cartasRestantes() < 4) {
-                System.out.println("No hay suficientes cartas para continuar.");
+                System.out.println(" - No hay suficientes cartas para continuar - ");
                 break;
             }
 
@@ -73,10 +73,6 @@ public class ControladorJuego {
         System.out.println("--------------------------------------");
 
         
-        // Muestra quién está al frente de la cola (recibe la primera carta)
-        Jugador primero = jugadores.frente();
-        System.out.println("Primer turno: " + primero.getNombre() + " " + primero.getApellido());
-
         // Arreglo para guardar los jugadores de esta ronda
         Arreglo<Jugador> jugadoresRonda = new Arreglo<>(4);
 
@@ -131,7 +127,7 @@ public class ControladorJuego {
             }
         }
 
-        System.out.println("Mayor valor de la ronda: " + mayorValor);
+        System.out.println(" Mayor valor de la ronda: " + mayorValor);
 
         // Si existe un único ganador
         if (cantidadMaximos == 1) {
@@ -149,14 +145,15 @@ public class ControladorJuego {
             Jugador ganador = jugadoresRonda.obtener(posicionGanador);
 
             System.out.println();
-            System.out.println(">>> GANADOR DE LA RONDA <<<");
+            System.out.println("> GANADOR DE LA RONDA <");
             System.out.println(
-                    ganador.getNombre()
+                    " * "
+                    + ganador.getNombre()
                     + " "
                     + ganador.getApellido()
             );
 
-            System.out.println("Se queda con las 4 cartas");
+            System.out.println(" (se queda con las 4 cartas) ");
 
             // El ganador recibe las cuatro cartas
             for (int i = 0; i < cartasRonda.longitud(); i++) {
@@ -170,7 +167,7 @@ public class ControladorJuego {
 
             // Si hay empate
             System.out.println();
-            System.out.println(">>> EMPATE <<<");
+            System.out.println(">> EMPATE <<");
             System.out.println(
                     "Hay " + cantidadMaximos
                     + " jugadores con el valor máximo."
@@ -199,7 +196,7 @@ public class ControladorJuego {
     private void mostrarResultadosFinales() {
 
         System.out.println("======================================");
-        System.out.println("          RESULTADOS FINALES");
+        System.out.println("       🏆 RESULTADOS FINALES 🏆      ");
         System.out.println("======================================");
 
         // Arreglo de jugadores
@@ -246,9 +243,9 @@ public class ControladorJuego {
         }
 
         System.out.println();
-        System.out.println("Mayor puntaje: " + mayorPuntaje);
+        System.out.println(" Mayor puntaje: " + mayorPuntaje);
         System.out.println();
-        System.out.println("Jugador(es) con mayor puntaje:");
+        System.out.println(" >>> Jugador(es) con mayor puntaje: <<< ");
 
         // Buscamos quiénes tienen el mayor puntaje
         for (int i = 0; i < jugadoresFinales.longitud(); i++) {
@@ -258,7 +255,7 @@ public class ControladorJuego {
                 Jugador jugador = jugadoresFinales.obtener(i);
 
                 System.out.println(
-                        "- "
+                        " ** "
                         + jugador.getNombre()
                         + " "
                         + jugador.getApellido()
@@ -267,8 +264,8 @@ public class ControladorJuego {
         }
 
         System.out.println();
-        System.out.println("======================================");
-        System.out.println("            FIN DE LA PARTIDA");
-        System.out.println("======================================");
+        System.out.println(" --------------------------------------");
+        System.out.println("          FIN DE LA PARTIDA         ");
+        System.out.println(" --------------------------------------");
     }
 }
